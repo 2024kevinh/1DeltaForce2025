@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Operators - Delta Force{% endblock %}
+
+{% block content %}
+<h2>Meet the Operators</h2>
+
+<ul>
+    {% for operator in operators %}
+    <li>
+        <strong>{{ operator.name }}</strong> – {{ operator.info }} (Country: {{ operator.country_name }})
+        {% if operator.abilities %}
+            <p>Abilities: {{ ", ".join(operator.abilities) }}</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

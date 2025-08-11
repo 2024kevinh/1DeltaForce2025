@@ -1,0 +1,27 @@
+body {
+    font-family: "Bunken tech sans";
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+}
+
+nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+main {
+    padding: 2em;
+    background-color: white;
+}
+
+.M250-machine-gun-image {
+    height: 250px;
+}

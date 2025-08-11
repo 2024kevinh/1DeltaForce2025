@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Weapon Details - Delta Force{% endblock %}
+
+{% block content %}
+<h2>Weapon Details</h2>
+<p>These are the most popular and strongest weapons in the game for each type of gun.</p>
+
+{% if weapon_id == 1 %}
+    <h3>K437 Assault Rifle</h3>
+    <p>High firing rate and fine damage. Effective at medium short range.</p>
+{% elif weapon_id == 2 %}
+    <h3>M250 Machine Gun</h3>
+    <img class="M250-machine-gun-image" src="{{ url_for('static', filename='images/M250.webp')}}" alt="M250">
+    <p>High damage, low firing speed. Effective at medium long range.</p>
+{% elif weapon_id == 3 %}
+    <h3>M700 Sniper Rifle</h3>
+    <p>High-powered bolt-action rifle for long-range kills.</p>
+{% else %}
+    <p>Weapon not found.</p>
+{% endif %}
+{% endblock %}
