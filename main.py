@@ -28,7 +28,7 @@ def operators():
         LEFT JOIN Operator_Ability AS OA ON O.id = OA.operator_id
         LEFT JOIN Ability AS A ON OA.ability_id = A.ability_id
         GROUP BY O.id, O.name, O.info, C.country
-    ''').fetchall() # 
+    ''').fetchall()
     conn.close()
 
     # Process the fetched data to turn abilities string into a list

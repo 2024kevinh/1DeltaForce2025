@@ -5,14 +5,35 @@
 {% block content %}
 <h2>Meet the Operators</h2>
 
-<ul>
+<link rel="stylesheet" href="/static/style.css" >
+
+<ul class="operator-list">
     {% for operator in operators %}
-    <li>
-        <strong>{{ operator.name }}</strong> – {{ operator.info }} (Country: {{ operator.country_name }})
-        {% if operator.abilities %}
-            <p>Abilities: {{ ", ".join(operator.abilities) }}</p>
+        {% if operator.name == 'Toxik' %}
+            <li class="operator-card"
+                style="background-image: url('{{ url_for('static', filename='images/Toxik.webp') }}')">
+        {% elif operator.name == 'D-Wolf' %}
+            <li class="operator-card"
+                style="background-image: url('{{ url_for('static', filename='images/D-Wolf.png') }}')">
+        {% else %}
+            <li class="operator-card"
+                style="background-image: url('{{ url_for('static', filename='images/' + operator.name|lower + '.jpg') }}')">
         {% endif %}
-    </li>
+        
+            <h3 class="operator-name">{{ operator.name }}</h3>
+            <span class="operator-country">({{ operator.country_name }})</span>
+            
+            <p>{{ operator.info }}</p>
+
+            {% if operator.abilities %}
+                <p><strong>Abilities:</strong></p>
+                <ul class="operator-abilities">
+                    {% for ability in operator.abilities %}
+                        <li>{{ ability }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
     {% endfor %}
 </ul>
 

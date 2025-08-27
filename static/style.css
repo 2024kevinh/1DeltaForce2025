@@ -29,3 +29,54 @@ main {
 .M700-sniper-rifle-image {
     height: 250px;
 }
+
+.operator-list {
+        list-style: none; /* No bullet points */
+        padding: 0;
+    }
+.operator-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: white; /* Text white */
+    background-size: cover;
+    background-position: center top; /* keeps faces more visible */
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    min-height: 450px; /* taller cards */
+}
+/* Dark overlay for readability */
+.operator-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+/* Ensure text stays above overlay */
+.operator-card * {
+    position: relative;
+    z-index: 1;
+}
+.operator-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.operator-country {
+    font-size: 0.9em;
+    display: block;
+    margin-top: -5px;
+    opacity: 0.85;
+}
+.operator-abilities {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    text-align: left;
+}
