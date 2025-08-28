@@ -5,9 +5,9 @@ import sqlite3
 app = Flask(__name__)
 
 def get_db_connection():
-     conn = sqlite3.connect('delta__force.db')
-     conn.row_factory = sqlite3.Row
-     return conn
+    conn = sqlite3.connect('delta__force.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
 @app.route('/')
 def index():
@@ -16,32 +16,59 @@ def index():
 @app.route('/operators')
 def operators():
     conn = get_db_connection()
-    # Join Operator and Country tables to get operator name, info, and country name
+    # Fetch operators with their abilities (multiple rows per operator possible)
     operators_data = conn.execute('''
         SELECT
+            O.id,
             O.name,
             O.info,
             C.country AS country_name,
-            GROUP_CONCAT(A.ability) AS abilities
+            A.trait,
+            A.tactical_gear,
+            A.gadget1,
+            A.gadget2
         FROM Operator AS O
         JOIN Country AS C ON O.country = C.id
         LEFT JOIN Operator_Ability AS OA ON O.id = OA.operator_id
         LEFT JOIN Ability AS A ON OA.ability_id = A.ability_id
-        GROUP BY O.id, O.name, O.info, C.country
     ''').fetchall()
     conn.close()
 
-    # Process the fetched data to turn abilities string into a list
-    operators_list = []
-    for op in operators_data:
-        operator_dict = dict(op)
-        if operator_dict['abilities']:
-            operator_dict['abilities'] = operator_dict['abilities'].split(',')
-        else:
-            operator_dict['abilities'] = []
-        operators_list.append(operator_dict)
+    # Process into a dict keyed by operator ID
+    operators_dict = {}
+    for row in operators_data:
+        op_id = row["id"]
 
-    return render_template('operators.html', operators=operators_list) # Pass the data to the template
+        if op_id not in operators_dict:
+            operators_dict[op_id] = {
+                "id": row["id"],
+                "name": row["name"],
+                "info": row["info"],
+                "country_name": row["country_name"],
+                "trait": None,
+                "tactical_gear": None,
+                "gadget1": None,
+                "gadget2": None,
+                "abilities": []
+            }
+
+        # Always set if present and not None
+        if row["trait"]:
+            operators_dict[op_id]["trait"] = row["trait"]
+            operators_dict[op_id]["abilities"].append(f"Trait: {row['trait']}")
+        if row["tactical_gear"]:
+            operators_dict[op_id]["tactical_gear"] = row["tactical_gear"]
+            operators_dict[op_id]["abilities"].append(f"Tactical Gear: {row['tactical_gear']}")
+        if row["gadget1"]:
+            operators_dict[op_id]["gadget1"] = row["gadget1"]
+            operators_dict[op_id]["abilities"].append(f"Gadget 1: {row['gadget1']}")
+        if row["gadget2"]:
+            operators_dict[op_id]["gadget2"] = row["gadget2"]
+            operators_dict[op_id]["abilities"].append(f"Gadget 2: {row['gadget2']}")
+
+    operators_list = list(operators_dict.values())
+
+    return render_template('operators.html', operators=operators_list)
 
 @app.route('/weapons')
 def weapons():
@@ -49,8 +76,7 @@ def weapons():
 
 @app.route('/weapon/<int:weapon_id>')
 def weapon_detail(weapon_id):
-    # This route will also need to be updated to fetch from the database
-    # For now, it remains as is, but you'll apply similar database logic here later.
+    # Placeholder for weapon details
     return render_template('weapon_detail.html', weapon_id=weapon_id)
 
 if __name__ == '__main__':

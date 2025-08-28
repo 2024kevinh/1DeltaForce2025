@@ -5,7 +5,7 @@
 {% block content %}
 <h2>Meet the Operators</h2>
 
-<link rel="stylesheet" href="/static/style.css" >
+<link rel="stylesheet" href="/static/style.css">
 
 <ul class="operator-list">
     {% for operator in operators %}
@@ -25,12 +25,21 @@
             
             <p>{{ operator.info }}</p>
 
-            {% if operator.abilities %}
+            {% if operator.trait or operator.tactical_gear or operator.gadget1 or operator.gadget2 %}
                 <p><strong>Abilities:</strong></p>
                 <ul class="operator-abilities">
-                    {% for ability in operator.abilities %}
-                        <li>{{ ability }}</li>
-                    {% endfor %}
+                    {% if operator.trait %}
+                        <li><strong>Trait:</strong> {{ operator.trait }}</li>
+                    {% endif %}
+                    {% if operator.tactical_gear %}
+                        <li><strong>Tactical Gear:</strong> {{ operator.tactical_gear }}</li>
+                    {% endif %}
+                    {% if operator.gadget1 %}
+                        <li><strong>Gadget 1:</strong> {{ operator.gadget1 }}</li>
+                    {% endif %}
+                    {% if operator.gadget2 %}
+                        <li><strong>Gadget 2:</strong> {{ operator.gadget2 }}</li>
+                    {% endif %}
                 </ul>
             {% endif %}
         </li>
