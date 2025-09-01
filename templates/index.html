@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Delta Force{% endblock %}
+{% block title %}Delta Force{% endblock %}
 
 {% block content %}
-    <h2>Welcome to Delta Force</h2>
-    <p>In this website you will learn about the weapons, maps and operators.</p>
+<div class="hero-container">
+    <img src="{{ url_for('static', filename='images/Delta_Force_Hero_Image.webp') }}" alt="Delta Force Hero" class="hero-image">
+    <div class="hero-text">
+        <h1>Delta Force</h1>
+    </div>
+</div>
+<div class="intro-container">
+    <p>
+        Welcome to Delta Force! Assemble your elite squad, master unique operator abilities, and dominate the battlefield. Explore our operators and weapons to prepare for your next mission.
+    </p>
+</div>
 {% endblock %}

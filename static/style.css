@@ -1,25 +1,29 @@
 body {
-    font-family: "Bunken tech sans";
+    font-family: "Bunken tech sans", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    background: #232a36; /* more greyish navy */
+    color: #e0e0e0;
 }
 
-header, footer {
-    background-color: #333;
-    color: white;
-    padding: 1em;
+nav, header, footer {
+    background: #000;
+    color: #fff;
+    padding: 1em 2em;
+    box-shadow: none;
+    margin: 0;
+    border: 0;
 }
 
 nav a {
-    color: white;
+    color: #fff;
     margin: 0 1em;
     text-decoration: none;
 }
 
 main {
     padding: 2em;
-    background-color: white;
+    background: #232a36; /* match body background */
 }
 
 .M250-machine-gun-image {
@@ -40,11 +44,12 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     color: white; /* Text white */
+    background: #19223a;
     background-size: cover;
     background-position: center top; /* keeps faces more visible */
     padding: 20px;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
     min-height: 450px; /* taller cards */
 }
 /* Dark overlay for readability */
@@ -63,6 +68,13 @@ main {
     position: relative;
     z-index: 1;
 }
+.operator-card h3,
+.operator-card .operator-name,
+.operator-card .operator-country,
+.operator-card p,
+.operator-card ul {
+    text-align: left;
+}
 .operator-name {
     font-size: 1.8em;
     font-weight: bold;
@@ -79,4 +91,76 @@ main {
     padding: 0;
     display: inline-block;
     text-align: left;
+}
+
+/* Navigation bar (if you have one in base.html) */
+nav {
+    color: #fff;
+    padding: 1em 0em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Hero image container */
+.hero-container {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -35px;
+    margin-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+    background: #232a36; /* match body background */
+}
+
+.hero-image {
+    width: 100vw;
+    height: 60vh; /* responsive height, adjust as needed */
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.6) grayscale(0.1);
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    width: 100%;
+}
+
+.hero-text h1 {
+    font-size: 5em;
+    font-weight: bold;
+    letter-spacing: 0.01em; /* less spacing */
+    margin: 0;
+    text-shadow: 0 4px 32px #000, 0 1px 0 #444;
+    font-family: "Bunken tech sans", sans-serif !important;
+}
+
+/* Introduction section */
+.intro-container {
+    max-width: 800px;
+    margin: 2em auto;
+    background: none; /* Remove separate background */
+    padding: 2em 0 0 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: center;
+    font-size: 1.3em;
+    color: #e0e0e0;
+}
+
+/* Ensure all text uses Bunken tech sans */
+body, h1, h2, h3, h4, h5, h6, p, nav, header, footer, .hero-text, .operator-card, .intro-container, .operator-name, .operator-country, .operator-abilities, .hero-text h1 {
+    font-family: "Bunken tech sans", sans-serif !important;
 }
