@@ -34,7 +34,7 @@ def operators():
     ''').fetchall()
     conn.close()
 
-    # Process into a dict keyed by operator ID
+    # Put in to order by op id
     operators_dict = {}
     for row in operators_data:
         op_id = row["id"]
@@ -52,7 +52,6 @@ def operators():
                 "abilities": []
             }
 
-        # Always set if present and not None
         if row["trait"]:
             operators_dict[op_id]["trait"] = row["trait"]
             operators_dict[op_id]["abilities"].append(f"Trait: {row['trait']}")
@@ -76,8 +75,17 @@ def weapons():
 
 @app.route('/weapon/<int:weapon_id>')
 def weapon_detail(weapon_id):
-    # Placeholder for weapon details
+    # weapon details
     return render_template('weapon_detail.html', weapon_id=weapon_id)
+
+@app.route('/weapons/<category>')
+def weapon_category(category):
+    conn = get_db_connection()
+    weapons = conn.execute(
+        "SELECT * FROM Weapon WHERE category = ?", (category,)
+    ).fetchall()
+    conn.close()
+    return render_template('weapon_category.html', weapons=weapons, category=category)
 
 if __name__ == '__main__':
     app.run(debug=True)

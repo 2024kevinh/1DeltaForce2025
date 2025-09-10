@@ -3,10 +3,25 @@
 {% block title %}Weapons - Delta Force{% endblock %}
 
 {% block content %}
-<h2>Available Weapons</h2>
-<ul>
-    <li><a href="{{ url_for('weapon_detail', weapon_id=1) }}"><h3>Assault Rifles</h3></a></li>
-    <li><a href="{{ url_for('weapon_detail', weapon_id=2) }}"><h3>Machine Guns</h3></a></li>
-    <li><a href="{{ url_for('weapon_detail', weapon_id=3) }}"><h3>Sniper Rifles</h3></a></li>
+<h2>Available Weapon Categories</h2>
+<ul class="weapon-list">
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='assault_rifle') }}'">
+        <h3>Assault Rifle</h3>
+    </li>
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='submachine_gun') }}'">
+        <h3>Submachine Gun</h3>
+    </li>
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='shotgun') }}'">
+        <h3>Shotgun</h3>
+    </li>
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='lightmachine_gun') }}'">
+        <h3>Lightmachine Gun</h3>
+    </li>
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='marksman_rifle') }}'">
+        <h3>Marksman Rifle</h3>
+    </li>
+    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='sniper_rifle') }}'">
+        <h3>Sniper Rifle</h3>
+    </li>
 </ul>
 {% endblock %}

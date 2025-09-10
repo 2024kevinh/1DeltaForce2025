@@ -2,7 +2,7 @@ body {
     font-family: "Bunken tech sans", sans-serif;
     margin: 0;
     padding: 0;
-    background: #232a36; /* more greyish navy */
+    background: #232a36;
     color: #e0e0e0;
 }
 
@@ -23,7 +23,7 @@ nav a {
 
 main {
     padding: 2em;
-    background: #232a36; /* match body background */
+    background: #232a36; 
 }
 
 .M250-machine-gun-image {
@@ -35,7 +35,7 @@ main {
 }
 
 .operator-list {
-        list-style: none; /* No bullet points */
+        list-style: none; 
         padding: 0;
     }
 .operator-card {
@@ -43,16 +43,16 @@ main {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    color: white; /* Text white */
+    color: white; 
     background: #19223a;
     background-size: cover;
-    background-position: center top; /* keeps faces more visible */
+    background-position: center top;
     padding: 20px;
     margin-bottom: 20px;
     text-align: left;
-    min-height: 450px; /* taller cards */
+    min-height: 450px;
 }
-/* Dark overlay for readability */
+
 .operator-card::before {
     content: "";
     position: absolute;
@@ -63,7 +63,6 @@ main {
     background: rgba(0,0,0,0.4);
     z-index: 0;
 }
-/* Ensure text stays above overlay */
 .operator-card * {
     position: relative;
     z-index: 1;
@@ -93,14 +92,12 @@ main {
     text-align: left;
 }
 
-/* Navigation bar (if you have one in base.html) */
 nav {
     color: #fff;
     padding: 1em 0em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Hero image container */
 .hero-container {
     position: relative;
     width: 100vw;
@@ -114,12 +111,12 @@ nav {
     overflow: hidden;
     border-radius: 0;
     box-shadow: none;
-    background: #232a36; /* match body background */
+    background: #232a36;
 }
 
 .hero-image {
     width: 100vw;
-    height: 60vh; /* responsive height, adjust as needed */
+    height: 60vh;
     object-fit: cover;
     display: block;
     filter: brightness(0.6) grayscale(0.1);
@@ -141,17 +138,16 @@ nav {
 .hero-text h1 {
     font-size: 5em;
     font-weight: bold;
-    letter-spacing: 0.01em; /* less spacing */
+    letter-spacing: 0.01em;
     margin: 0;
     text-shadow: 0 4px 32px #000, 0 1px 0 #444;
     font-family: "Bunken tech sans", sans-serif !important;
 }
 
-/* Introduction section */
 .intro-container {
     max-width: 800px;
     margin: 2em auto;
-    background: none; /* Remove separate background */
+    background: none;
     padding: 2em 0 0 0;
     border-radius: 0;
     box-shadow: none;
@@ -160,7 +156,57 @@ nav {
     color: #e0e0e0;
 }
 
-/* Ensure all text uses Bunken tech sans */
+.weapon-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 2em 0;
+}
+
+.weapon-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: white;
+    background: #19223a;
+    padding: 32px 20px;
+    min-height: 180px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-align: left;
+    display: flex;
+    align-items: flex-end;
+}
+
+.weapon-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.weapon-card h3 {
+    font-size: 2em;
+    margin: 0;
+    font-family: "Bunken tech sans", sans-serif !important;
+}
+
 body, h1, h2, h3, h4, h5, h6, p, nav, header, footer, .hero-text, .operator-card, .intro-container, .operator-name, .operator-country, .operator-abilities, .hero-text h1 {
     font-family: "Bunken tech sans", sans-serif !important;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 1em;
+    color: #fff;
+    background: #22305a;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: "Bunken tech sans", sans-serif !important;
+    transition: background 0.2s;
+}
+.back-button:hover {
+    background: #19223a;
 }
