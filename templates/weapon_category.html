@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.replace('_', ' ').title() }} Weapons - Delta Force{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to Weapon Categories</a>
+<h2>{{ category.replace('_', ' ').title() }} Weapons</h2>
+<ul class="weapon-list">
+    {% for weapon in weapons %}
+        <li class="weapon-card"
+            onclick="location.href='{{ url_for('weapon_detail', weapon_id=weapon.id) }}'">
+            <img src="{{ url_for('static', filename='images/' + weapon.name + '.png') }}"
+                 alt="{{ weapon.name }}"
+                 class="weapon-img">
+            <h3>{{ weapon.name }}</h3>
+        </li>
+    {% else %}
+        <li>No weapons found in this category.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
