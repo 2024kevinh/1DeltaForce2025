@@ -375,3 +375,13 @@ nav {
     border-radius: 16px; /* Rounded edges */
     color: #e0e0e0; /* Light grey text */
 }
+
+/* ====== Operator detail info section (dark mode) ====== */
+.operator-detail-info-dark {
+    color: #111 !important; /* Black text for light backgrounds */
+}
+
+/* ====== Operator detail info paragraph styling ====== */
+.operator-detail-info p {
+    font-weight: bold; /* Bold text */
+}

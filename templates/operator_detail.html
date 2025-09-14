@@ -19,10 +19,15 @@
         {% endif %}
      ">
     <a href="{{ url_for('operators') }}" class="back-button operator-back-btn">&larr; Back to Operators</a>
-    <div class="operator-detail-info">
+    <div class="operator-detail-info{% if operator.name in ['D-Wolf', 'Luna', 'Hackclaw'] %} operator-detail-info-dark{% endif %}">
         <h1>{{ operator.name }}</h1>
         <h3>{{ operator.country_name }}</h3>
-        <p>{{ operator.info }}</p>
+        <p>
+            {% set words = operator.info.split() %}
+            {% for i in range(0, words|length, 6) %}
+                {{ words[i:i+6]|join(' ') }}<br>
+            {% endfor %}
+        </p>
     </div>
 </div>
 <div class="operator-abilities-row">
