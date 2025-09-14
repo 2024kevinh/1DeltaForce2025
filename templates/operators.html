@@ -18,11 +18,11 @@
         {% elif operator.name == 'Luna' %}
             <li class="operator-card"
                 onclick="location.href='{{ url_for('operator_detail', operator_id=operator.id) }}'"
-                style="background-image: url('{{ url_for('static', filename='images/Luna3.webp') }}')">
+                style="background-image: url('{{ url_for('static', filename='images/Luna2.webp') }}')">
         {% elif operator.name == 'Nox' %}
             <li class="operator-card"
                 onclick="location.href='{{ url_for('operator_detail', operator_id=operator.id) }}'"
-                style="background-image: url('{{ url_for('static', filename='images/Nox.webp') }}')">
+                style="background-image: url('{{ url_for('static', filename='images/Nox1.jpg') }}')">
         {% else %}
             <li class="operator-card"
                 onclick="location.href='{{ url_for('operator_detail', operator_id=operator.id) }}'"
