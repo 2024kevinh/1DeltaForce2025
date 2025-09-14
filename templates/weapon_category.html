@@ -3,16 +3,20 @@
 {% block title %}{{ category.replace('_', ' ').title() }} Weapons - Delta Force{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to Weapon Categories</a>
+{% if prev_weapon_id %}
+    <a href="{{ url_for('weapon_detail', weapon_id=prev_weapon_id) }}" class="back-button">&larr; Back to Weapon</a>
+{% else %}
+    <a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to Weapon Categories</a>
+{% endif %}
 <h2>{{ category.replace('_', ' ').title() }} Weapons</h2>
 <ul class="weapon-list">
     {% for weapon in weapons %}
         <li class="weapon-card"
-            onclick="location.href='{{ url_for('weapon_detail', weapon_id=weapon.id) }}'">
-            <img src="{{ url_for('static', filename='images/' + weapon.name + '.png') }}"
-                 alt="{{ weapon.name }}"
-                 class="weapon-img">
-            <h3>{{ weapon.name }}</h3>
+            onclick="location.href='{{ url_for('weapon_detail', weapon_id=weapon.id) }}'"
+            style="background-image: url('{{ url_for('static', filename='images/' + weapon.name + '.png') }}'); background-size: cover; background-position: center; position: relative;">
+            <div class="weapon-card-info">
+                <h3>{{ weapon.name }}</h3>
+            </div>
         </li>
     {% else %}
         <li>No weapons found in this category.</li>

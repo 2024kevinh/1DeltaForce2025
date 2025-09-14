@@ -3,25 +3,52 @@
 {% block title %}Weapons - Delta Force{% endblock %}
 
 {% block content %}
-<h2>Available Weapon Categories</h2>
-<ul class="weapon-list">
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='assault_rifle') }}'">
-        <h3>Assault Rifle</h3>
-    </li>
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='submachine_gun') }}'">
-        <h3>Submachine Gun</h3>
-    </li>
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='shotgun') }}'">
-        <h3>Shotgun</h3>
-    </li>
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='lightmachine_gun') }}'">
-        <h3>Lightmachine Gun</h3>
-    </li>
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='marksman_rifle') }}'">
-        <h3>Marksman Rifle</h3>
-    </li>
-    <li class="weapon-card" onclick="location.href='{{ url_for('weapon_category', category='sniper_rifle') }}'">
-        <h3>Sniper Rifle</h3>
-    </li>
+<h2>Weapon Categories</h2>
+<ul class="weapon-category-list">
+    {% for category in categories %}
+        <li class="weapon-category-card"
+            onclick="location.href='{{ url_for('weapon_category', category=category.name) }}'"
+            style="background-image: url('{{ url_for('static', filename='images/' + category.label + '.png') }}'); background-size: cover; background-position: center; position: relative;">
+            <div class="weapon-card-info">
+                <h3>{{ category.label }}</h3>
+            </div>
+        </li>
+    {% endfor %}
 </ul>
 {% endblock %}
+
+<style>
+.operator-card,
+.weapon-category-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: white;
+    background: #19223a;
+    background-size: cover;
+    background-position: center top;
+    padding: 16px;
+    min-height: 320px;
+    max-width: 220px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.weapon-card-info {
+    background: rgba(35,42,54,0.85);
+    padding: 1em;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    color: #e0e0e0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-family: "Bunken tech sans", sans-serif !important;
+    text-align: left;
+}
+</style>

@@ -3,30 +3,31 @@
 {% block title %}{{ operator.name }} - Delta Force{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('operators') }}" class="back-button" style="margin-top: 2em; margin-left: 0; position: relative; z-index: 2;">&larr; Back to Operators</a>
 <div class="operator-detail-bg"
      style="
-        background-image: url('{{ url_for('static', filename='images/OPERATOR_IMAGE_FILE') }}');
-        background-size: cover;
-        background-position: center;
-        min-height: 60vh;
-        border-radius: 16px;
-        margin-bottom: 2em;
-        display: flex;
-        align-items: flex-end;
+        position: relative;
+        {% if operator.name == 'Toxik' %}
+            background-image: url('{{ url_for('static', filename='images/Toxik.jpg') }}');
+        {% elif operator.name == 'D-Wolf' %}
+            background-image: url('{{ url_for('static', filename='images/D-Wolf.png') }}');
+        {% elif operator.name == 'Luna' %}
+            background-image: url('{{ url_for('static', filename='images/Luna3.webp') }}');
+        {% elif operator.name == 'Nox' %}
+            background-image: url('{{ url_for('static', filename='images/Nox.webp') }}');
+        {% else %}
+            background-image: url('{{ url_for('static', filename='images/' + operator.name|lower + '.jpg') }}');
+        {% endif %}
      ">
-    <div class="operator-detail-info" style="background: rgba(35,42,54,0.85); padding: 2em; border-radius: 0 0 16px 16px; width: 100%;">
+    <a href="{{ url_for('operators') }}" class="back-button operator-back-btn">&larr; Back to Operators</a>
+    <div class="operator-detail-info">
         <h1>{{ operator.name }}</h1>
         <h3>{{ operator.country_name }}</h3>
         <p>{{ operator.info }}</p>
-        {% if operator.abilities %}
-            <h4>Abilities</h4>
-            <ul>
-                {% for ability in operator.abilities %}
-                    <li>{{ ability }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
     </div>
+</div>
+<div class="operator-abilities-row">
+    {% for ability in operator.abilities %}
+        <div class="operator-ability-col">{{ ability }}</div>
+    {% endfor %}
 </div>
 {% endblock %}

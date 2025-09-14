@@ -3,29 +3,22 @@
 {% block title %}{{ weapon.name if weapon else "Weapon Not Found" }} - Delta Force{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('weapon_category', category=weapon.category) }}" class="back-button">&larr; Back to {{ weapon.category.replace('_', ' ').title() }} Weapons</a>
-{% if weapon %}
-<div class="weapon-detail-bg"
-     style="
-        background-color: #22305a;
-        min-height: 60vh;
-        border-radius: 16px;
-        margin-bottom: 2em;
-        display: flex;
-        align-items: flex-end;
-     ">
-    <div class="weapon-detail-info" style="background: rgba(35,42,54,0.85); padding: 2em; border-radius: 0 0 16px 16px; width: 100%;">
-        <img src="{{ url_for('static', filename='images/' + weapon.name + '.png') }}"
+<a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to {{ weapon.category.replace('_', ' ').title() }} Weapons</a>
+<div class="weapon-detail-img-container">
+    <div class="weapon-img-wrapper">
+        <img src="{{ url_for('static', filename='images/D-' + weapon.name + '.png') }}"
              alt="{{ weapon.name }}"
-             class="weapon-img">
-        <h1>{{ weapon.name }}</h1>
-        <h3>{{ weapon.category.replace('_', ' ').title() }}</h3>
-        <p>{{ weapon.description }}</p>
+             class="weapon-img-rotated">
     </div>
 </div>
-{% else %}
-    <p>Weapon not found.</p>
-{% endif %}
+<div class="weapon-info-section">
+    <h3>Weapon Information</h3>
+    <p>{{ weapon.description }}</p>
+</div>
+<div class="weapon-ammo-section">
+    <h3>Ammo Information</h3>
+    <!-- Ammo info goes here -->
+</div>
 {% endblock %}
 
 <style>
@@ -40,15 +33,108 @@
     display: flex;
     align-items: flex-end;
 }
-.weapon-detail-info {
+.weapon-card-info {
+    background: rgba(35,42,54,0.85);
+    padding: 1em;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    color: #e0e0e0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-family: "Bunken tech sans", sans-serif !important;
+    text-align: left;
+}
+.weapon-info-section, .weapon-ammo-section {
     background: rgba(35,42,54,0.85);
     padding: 2em;
     border-radius: 0 0 16px 16px;
     width: 100%;
     color: #e0e0e0;
-}
-.weapon-detail-info h1, .weapon-detail-info h3, .weapon-detail-info p {
     font-family: "Bunken tech sans", sans-serif !important;
     text-align: left;
+    position: relative;
+    min-height: 200px; /* ensure enough space for image */
+}
+.weapon-info-section h3, .weapon-ammo-section h3, .weapon-info-section p {
+    font-family: "Bunken tech sans", sans-serif !important;
+    text-align: left;
+}
+.weapon-img-detail {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120px; /* adjust as needed */
+    height: auto;
+    transform: rotate(90deg);
+    object-fit: contain;
+    margin: 0;
+}
+.weapon-img {
+    display: block;
+    width: 80px; /* adjust as needed */
+    height: auto;
+    margin: 0 auto 8px auto;
+    transform: rotate(-90deg); /* anticlockwise */
+    object-fit: contain;
+}
+.weapon-img-rotated {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    transform: rotate(90deg); /* clockwise */
+    object-fit: contain;
+}
+.weapon-detail-img-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+}
+.weapon-img-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.weapon-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0.5em;
+    text-align: center;
+    font-family: "Bunken tech sans", sans-serif !important;
+}
+.weapon-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.weapon-category {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+}
+.operator-back-btn {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    z-index: 10;
+    background: rgba(35, 42, 54, 0.85);
+    color: #e0e0e0;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Bunken tech sans", sans-serif !important;
+}
+.operator-back-btn:hover {
+    background: rgba(35, 42, 54, 1);
 }
 </style>
