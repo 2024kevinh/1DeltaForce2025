@@ -13,7 +13,7 @@ app.secret_key = 'secret_key'  # Secret key for session management
 def get_db_connection():
     """Connect to the SQLite database and return the connection."""
     conn = sqlite3.connect('delta__force.db')
-    conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row  # Enable dict-like access to rows
     return conn
 
 
@@ -31,7 +31,7 @@ def load_logged_in_user():
             (user_email,)
         ).fetchone()
         conn.close()
-        g.user = user
+        g.user = user  # Store user info for use in templates
     else:
         g.user = None
 
@@ -79,6 +79,7 @@ def operators():
             "gadget2": row["gadget2"],
             "abilities": []
         }
+        # Add each ability if it exists
         if row["trait"]:
             operator["abilities"].append(f"Trait: {row['trait']}")
         if row["tactical_gear"]:
@@ -163,6 +164,7 @@ def weapon_detail(weapon_id):
         for row in ammo_rows
     ]
 
+    # If weapon not found, show empty page
     if weapon is None:
         return render_template('weapon_detail.html', weapon=None, ammo_list=[])
     return render_template('weapon_detail.html',
@@ -188,6 +190,7 @@ def weapon_category(category):
         "sniper_rifle": (43, 46)
     }
 
+    # Get weapons in the selected category
     if category in category_ranges:
         start_id, end_id = category_ranges[category]
         weapons = conn.execute(
@@ -243,6 +246,7 @@ def operator_detail(operator_id):
         "gadget2": row["gadget2"],
         "abilities": []
     }
+    # Add each ability if it exists
     if row["trait"]:
         operator["abilities"].append(f"Trait: {row['trait']}")
     if row["tactical_gear"]:
@@ -272,7 +276,7 @@ def login():
 
         # For production, use hashed passwords!
         if user and password == user['password']:
-            session['user'] = email
+            session['user'] = email  # Store user email in session
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
         flash('Invalid email or password', 'danger')
@@ -285,7 +289,7 @@ def logout():
     """
     Handle user logout and redirect to login page.
     """
-    session.pop('user', None)
+    session.pop('user', None)  # Remove user from session
     flash('Logged out successfully.', 'success')
     return redirect(url_for('login'))
 
@@ -303,6 +307,7 @@ def register():
 
         conn = get_db_connection()
         try:
+            # Insert new user into logins table
             conn.execute(
                 'INSERT INTO logins (name, email, password, role) '
                 'VALUES (?, ?, ?, ?)',
@@ -312,6 +317,7 @@ def register():
             flash('Registration successful! Please log in.', 'success')
             return redirect(url_for('login'))
         except sqlite3.IntegrityError:
+            # Email already exists in database
             flash('Email already registered.', 'danger')
         finally:
             conn.close()
@@ -335,6 +341,7 @@ def damage_simulator():
 
     conn = get_db_connection()
     all_weapons = []
+    # Gather all weapons grouped by category
     for cat in categories:
         weapons = conn.execute(
             '''SELECT id, name, damage FROM Weapon
@@ -359,6 +366,7 @@ def damage_simulator():
             'distance' in request.form
         ):
             weapon_id = int(weapon_id)
+            # Find the selected weapon and its category
             for group in all_weapons:
                 for w in group['weapons']:
                     if w['id'] == weapon_id:
@@ -372,6 +380,7 @@ def damage_simulator():
             distance = int(request.form['distance'])
 
             base_damage = selected_weapon['damage']
+            # Adjust damage for hit part
             if hit_part == 'head':
                 base_damage = int(base_damage * 1.8)
             elif hit_part == 'legs' or hit_part == 'limbs':
@@ -382,6 +391,7 @@ def damage_simulator():
             final_damage = int(base_damage * (0.9 ** reduction))
             remaining_hp = max(100 - final_damage, 0)
 
+            # Prepare result dictionary for template
             result = {
                 'weapon': selected_weapon['name'],
                 'category': selected_category,
@@ -405,4 +415,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
+    # Run the Flask development server
     app.run(debug=True)
