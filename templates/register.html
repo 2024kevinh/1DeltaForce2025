@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <!-- Loads the login/register page stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 
 <body>
     <div class="container">
+        <!-- Flash messages for registration errors or success -->
         <div class="flash-container">
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
@@ -19,6 +21,7 @@
               {% endif %}
             {% endwith %}
         </div>
+        <!-- Registration form -->
         <div class="form-box active" id="register-form">
             <form action="{{ url_for('register') }}" method="POST">
                 <h2>Register</h2>

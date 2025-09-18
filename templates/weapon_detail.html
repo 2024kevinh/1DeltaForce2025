@@ -3,9 +3,15 @@
 {% block title %}{{ weapon.name if weapon else "Weapon Not Found" }} - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    weapon_detail.html
+    Shows detailed information for a single weapon, including image, stats, and ammo info.
+    Displays a back button to the weapon category.
+-->
 <a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to {{ weapon.category.replace('_', ' ').title() }} Weapons</a>
 <div class="weapon-detail-img-container">
     <div class="weapon-img-wrapper">
+        <!-- Weapon image, rotated if needed -->
         <img src="{{ url_for('static', filename='images/D-' + weapon.name + '.png') }}"
              alt="{{ weapon.name }}"
              class="weapon-img-rotated">
@@ -15,6 +21,7 @@
     <h3>Weapon Information:</h3>
     <p>{{ weapon.description }}</p>
     <p>{{ weapon.weapon_info }}</p>
+    <!-- Stat cards for weapon attributes -->
     <div class="weapon-stats-grid">
         <div class="weapon-stat-card">
             <span class="stat-label">Damage</span>
@@ -48,13 +55,13 @@
             <span class="stat-label">Accuracy</span>
             <span class="stat-value">{{ weapon.accuracy }}</span>
         </div>
-
     </div>
 </div>
 <div class="weapon-ammo-section">
     <h3>Ammo Information:</h3>
     {% if ammo_list %}
         {% for ammo in ammo_list %}
+            <!-- Ammo type and info for this weapon -->
             <h4>{{ ammo.name }}</h4>
             <p>{{ ammo.info }}</p>
         {% endfor %}

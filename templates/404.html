@@ -3,10 +3,16 @@
 {% block title %}404 Not Found - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    404.html
+    Template shown when a user visits a page that does not exist.
+    Extends the base layout and displays a simple message and a link back to home.
+-->
 <div style="text-align: left; max-width: 600px;">
     <h1>404</h1>
     <h2>Page Not Found</h2>
     <p>The page you are looking for does not exist.</p>
+    <!-- Link to return to the home page -->
     <a href="{{ url_for('index') }}" class="back-button">&larr; Back to Home</a>
 </div>
 {% endblock %}

@@ -3,9 +3,15 @@
 {% block title %}Damage Simulator - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    damage_simulator.html
+    Shows a form for simulating weapon damage based on weapon, hit part, and distance.
+    Displays the result after the user submits the form.
+-->
 <div class="damage-simulator-container">
     <h2>Damage Simulator</h2>
     <form method="POST" id="damage-form">
+        <!-- Weapon selection dropdown, grouped by category -->
         <label for="weapon">Weapon:</label>
         <select name="weapon" id="weapon" required>
             <option value="" disabled selected>Select weapon</option>
@@ -20,6 +26,7 @@
             {% endfor %}
         </select>
         <br><br>
+        <!-- Hit part selection -->
         <label for="hit_part">Hit Part:</label>
         <select name="hit_part" id="hit_part" required>
             <option value="legs" {% if request.form.get('hit_part') == 'legs' %}selected{% endif %}>Legs</option>
@@ -27,6 +34,7 @@
             <option value="head" {% if request.form.get('hit_part') == 'head' %}selected{% endif %}>Head</option>
         </select>
         <br><br>
+        <!-- Distance input -->
         <label for="distance">Distance (meters):</label>
         <input type="number" name="distance" id="distance" min="0" max="200" value="{{ request.form.get('distance', 0) }}" required>
         <br><br>
@@ -34,6 +42,7 @@
     </form>
 
     {% if result %}
+        <!-- Display simulation result -->
         <div class="sim-result" style="margin-top:2em;">
             <h3>Result</h3>
             <p><strong>Weapon:</strong> {{ result.weapon }}</p>

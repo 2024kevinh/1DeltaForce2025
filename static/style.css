@@ -1,4 +1,5 @@
 /* ====== Global page styles ====== */
+/* Main font, background, and text color for the whole site */
 body {
     font-family: "Bunken tech sans", sans-serif;
     margin: 0;
@@ -8,6 +9,7 @@ body {
 }
 
 /* ====== Shared styles for nav, header, and footer ====== */
+/* Navbar, header, and footer backgrounds and text color */
 nav, header, footer {
     background: #000;
     color: #fff;
@@ -17,23 +19,27 @@ nav, header, footer {
     border: 0;
 }
 
+/* Navbar links styling */
 nav a {
     color: #fff;
     margin: 0 1em;
     text-decoration: none;
 }
 
+/* Navbar padding and shadow */
 nav {
     padding: 1em 0em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* ====== Main content area ====== */
+/* Padding for the main content area */
 main {
     padding: 2em;
 }
 
 /* ====== List grids ====== */
+/* Grid layouts for operator, weapon, and weapon category lists */
 .operator-list, 
 .weapon-list, 
 .weapon-category-list {
@@ -44,16 +50,19 @@ main {
     gap: 24px;
 }
 
+/* 5 columns for operator list */
 .operator-list {
     grid-template-columns: repeat(5, 1fr);
 }
 
+/* 6 columns for weapon and weapon category lists */
 .weapon-list,
 .weapon-category-list {
     grid-template-columns: repeat(6, 1fr);
 }
 
 /* ====== Card styles ====== */
+/* Card appearance for operators, weapons, and weapon categories */
 .operator-card,
 .weapon-card,
 .weapon-category-card {
@@ -76,6 +85,7 @@ main {
     transition: transform 0.15s, box-shadow 0.15s;
 }
 
+/* Card hover effect for interactivity */
 .operator-card:hover,
 .weapon-card:hover,
 .weapon-category-card:hover {
@@ -84,6 +94,7 @@ main {
 }
 
 /* ====== Operator card overlay ====== */
+/* Overlay for operator card background */
 .operator-card::before {
     content: "";
     position: absolute;
@@ -93,12 +104,14 @@ main {
     z-index: 0;
 }
 
+/* Ensure operator card content is above overlay */
 .operator-card * {
     position: relative;
     z-index: 1;
 }
 
 /* ====== Operator text styling ====== */
+/* Text alignment for operator card content */
 .operator-card h3,
 .operator-card .operator-name,
 .operator-card .operator-country,
@@ -107,12 +120,14 @@ main {
     text-align: left;
 }
 
+/* Operator name styling */
 .operator-name {
     font-size: 1.8em;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
+/* Operator country styling */
 .operator-country {
     font-size: 0.9em;
     display: block;
@@ -120,6 +135,7 @@ main {
     opacity: 0.85;
 }
 
+/* Operator abilities list styling */
 .operator-abilities {
     list-style: none;
     padding: 0;
@@ -128,6 +144,7 @@ main {
 }
 
 /* ====== Hero section ====== */
+/* Hero image container for the homepage */
 .hero-container {
     position: relative;
     width: 100vw;
@@ -139,6 +156,7 @@ main {
     background: #232a36;
 }
 
+/* Hero image styling */
 .hero-image {
     width: 100vw;
     height: 60vh;
@@ -148,6 +166,7 @@ main {
     margin: 0; padding: 0;
 }
 
+/* Hero text overlay styling */
 .hero-text {
     position: absolute;
     top: 50%; left: 50%;
@@ -157,6 +176,7 @@ main {
     width: 100%;
 }
 
+/* Hero heading styling */
 .hero-text h1 {
     font-size: 5em;
     font-weight: bold;
@@ -166,6 +186,7 @@ main {
 }
 
 /* ====== Intro container ====== */
+/* Centered intro text for homepage */
 .intro-container {
     max-width: 800px;
     margin: 2em auto;
@@ -193,11 +214,13 @@ main {
     cursor: pointer;
 }
 
+/* Back button hover effect */
 .back-button:hover,
 .operator-back-btn:hover {
     background: #19223a;
 }
 
+/* Operator back button position */
 .operator-back-btn {
     position: absolute;
     top: 24px; left: 24px;
@@ -223,6 +246,7 @@ main {
     object-fit: contain;
 }
 
+/* Standard weapon image */
 .weapon-img {
     display: flex;
     width: 400px;
@@ -232,6 +256,7 @@ main {
     justify-content: center;
 }
 
+/* Rotated weapon image for special cases */
 .weapon-img-rotated {
     width: 100vw;
     height: 100%;
@@ -476,7 +501,6 @@ form[action*="logout"] .nav-login-btn:hover {
     text-align: left;
 }
 
-/* Keep only once — no need to repeat */
 .weapon-info-section,
 .weapon-ammo-section {
     background: rgba(35,42,54,0.85);
@@ -545,7 +569,7 @@ form[action*="logout"] .nav-login-btn:hover {
     background: rgba(35, 42, 54, 1);
 }
 
-/* Stats grid */
+/* ====== Stats grid for weapon detail ====== */
 .weapon-stats-grid {
     display: flex;
     flex-wrap: wrap;

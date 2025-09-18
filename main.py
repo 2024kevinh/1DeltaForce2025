@@ -7,11 +7,11 @@ from flask import (
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key = 'secret_key'  # Replace with a secure key in production
+app.secret_key = 'secret_key'  # Secret key for session management
 
 
 def get_db_connection():
-    """Establish a connection to the SQLite database."""
+    """Connect to the SQLite database and return the connection."""
     conn = sqlite3.connect('delta__force.db')
     conn.row_factory = sqlite3.Row
     return conn
@@ -19,7 +19,10 @@ def get_db_connection():
 
 @app.before_request
 def load_logged_in_user():
-    """Load the logged-in user into the Flask global context (g)."""
+    """
+    Before each request, load the logged-in user (if any)
+    and store in Flask's global context (g).
+    """
     user_email = session.get('user')
     if user_email:
         conn = get_db_connection()
@@ -41,7 +44,9 @@ def index():
 
 @app.route('/operators')
 def operators():
-    """Display all operators."""
+    """
+    Show all operators with their info and abilities.
+    """
     conn = get_db_connection()
     operators_data = conn.execute(
         '''
@@ -60,7 +65,7 @@ def operators():
     ).fetchall()
     conn.close()
 
-    # Build a list of operator dictionaries
+    # Build a list of operator dictionaries for the template
     operators_list = []
     for row in operators_data:
         operator = {
@@ -91,7 +96,9 @@ def operators():
 
 @app.route('/weapons')
 def weapons():
-    """Display weapon categories."""
+    """
+    Show all weapon categories with their images.
+    """
     categories = [
         {
             "name": "assault_rifle",
@@ -130,7 +137,7 @@ def weapons():
 @app.route('/weapon/<int:weapon_id>')
 def weapon_detail(weapon_id):
     """
-    Display details for a specific weapon, including its ammo types.
+    Show details for a specific weapon, including its ammo types.
     """
     conn = get_db_connection()
     weapon = conn.execute(
@@ -138,7 +145,7 @@ def weapon_detail(weapon_id):
         (weapon_id,)
     ).fetchone()
 
-    # Get all ammo types for this weapon
+    # Get all ammo types for this weapon from the Weapon_Ammo table
     ammo_rows = conn.execute(
         '''
         SELECT A.name, A.ammo_info
@@ -150,6 +157,7 @@ def weapon_detail(weapon_id):
     ).fetchall()
     conn.close()
 
+    # Build a list of ammo info dictionaries for the template
     ammo_list = [
         {"name": row["name"], "info": row["ammo_info"]}
         for row in ammo_rows
@@ -165,7 +173,7 @@ def weapon_detail(weapon_id):
 @app.route('/weapons/<category>')
 def weapon_category(category):
     """
-    Display all weapons in a specific category.
+    Show all weapons in a specific category.
     """
     prev_weapon_id = request.args.get('prev_weapon_id')
     conn = get_db_connection()
@@ -201,7 +209,7 @@ def weapon_category(category):
 @app.route('/operator/<int:operator_id>')
 def operator_detail(operator_id):
     """
-    Display details for a specific operator.
+    Show details for a specific operator.
     """
     conn = get_db_connection()
     row = conn.execute(
@@ -223,6 +231,7 @@ def operator_detail(operator_id):
     ).fetchone()
     conn.close()
 
+    # Build the operator dictionary for the template
     operator = {
         "id": row["id"],
         "name": row["name"],
@@ -249,7 +258,7 @@ def operator_detail(operator_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """
-    Handle user login.
+    Handle user login. If credentials are correct, log in and redirect to home.
     """
     if request.method == 'POST':
         email = request.form['email']
@@ -261,7 +270,7 @@ def login():
         ).fetchone()
         conn.close()
 
-        # NOTE: For production, use hashed passwords!
+        # For production, use hashed passwords!
         if user and password == user['password']:
             session['user'] = email
             flash('Login successful!', 'success')
@@ -274,7 +283,7 @@ def login():
 @app.route('/logout', methods=['POST'])
 def logout():
     """
-    Handle user logout.
+    Handle user logout and redirect to login page.
     """
     session.pop('user', None)
     flash('Logged out successfully.', 'success')
@@ -284,7 +293,7 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """
-    Handle user registration.
+    Handle user registration. On success, redirect to login.
     """
     if request.method == 'POST':
         name = request.form['name']
@@ -368,7 +377,7 @@ def damage_simulator():
             elif hit_part == 'legs' or hit_part == 'limbs':
                 base_damage = int(base_damage * 0.9)
 
-            # Reduce damage by 10% for every 50m, up to 4 steps (max 200m)
+            # Reduce damage by 10% for every 50m, up to 6 steps (max 300m)
             reduction = min(distance // 50, 6)
             final_damage = int(base_damage * (0.9 ** reduction))
             remaining_hp = max(100 - final_damage, 0)
@@ -391,6 +400,7 @@ def damage_simulator():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """404 error page."""
     return render_template('404.html'), 404
 
 

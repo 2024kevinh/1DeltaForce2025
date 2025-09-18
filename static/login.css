@@ -1,8 +1,11 @@
+/* Reset and global box-sizing */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+/* Center the login/register container */
 body {
     display: flex;
     justify-content: center;
@@ -12,6 +15,8 @@ body {
     color: #e0e0e0;
     font-family: "Bunken tech sans", sans-serif;
 }
+
+/* Main container for login/register */
 .container {
     max-width: 400px;
     margin: 0 15px;
@@ -21,6 +26,7 @@ body {
     box-shadow: 0 0px 24px rgba(0,0,0,0.2);
 }
 
+/* Hide all form boxes by default, show active */
 .form-box {
     width: 100%;
     max-width: 450px;
@@ -32,12 +38,14 @@ body {
     display: block;
 }
 
+/* Heading style */
 h2 {
     font-size: 34px;
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Input and select fields */
 input, select {
     width: 100%;
     padding: 12px;
@@ -50,6 +58,7 @@ input, select {
     margin-bottom: 20px;
 }
 
+/* Button styling */
 button {
     width: 100%;
     padding: 12px;
@@ -68,6 +77,7 @@ button:hover {
     background: #6884d3;
 }
 
+/* Paragraph and link styling */
 p {
     font-size: 14.5px;
     text-align: center;
@@ -83,6 +93,7 @@ p a:hover {
     text-decoration: underline;
 }
 
+/* Flash message styling */
 .flash-container {
     display: flex;
     justify-content: center;
@@ -100,4 +111,6 @@ p a:hover {
 
 .flash.success { background: #2ecc71; color: #fff; }
 .flash.danger { background: #e74c3c; color: #fff; }
+
+/* General link color */
 a { color: #3498db; }

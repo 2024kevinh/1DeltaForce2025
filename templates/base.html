@@ -1,33 +1,48 @@
+<!--
+    base.html
+    This is the base template for all pages in Delta Force 2025.
+    Sets up the HTML structure, loads the main stylesheet, and provides
+    a header with navigation, a main content block, and a footer.
+    All other templates extend this file and fill in the content block.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Page title, can be overridden by child templates -->
     <title>{% block title %}Delta Force 2025{% endblock %}</title>
+    <!-- Main stylesheet for the site -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <!-- Header with logo and navigation bar -->
     <header>
         <b><span class="logo">Delta Force</span></b>
         <nav>
+            <!-- Navigation links to main pages -->
             <a href="{{ url_for('index') }}">Home</a> |
             <a href="{{ url_for('operators') }}">Operators</a> |
             <a href="{{ url_for('weapons') }}">Weapons</a> |
             <a href="{{ url_for('damage_simulator') }}" class="nav-link">Damage Simulator</a>
             {% if g.user %}
+                <!-- Shows logout button with user name if user is logged in -->
                 <form action="{{ url_for('logout') }}" method="post" style="display:inline;">
                     <button type="submit" class="nav-login-btn">{{ g.user['name'] }}</button>
                 </form>
             {% else %}
+                <!-- Shows login link if user is not logged in -->
                 <a href="{{ url_for('login') }}" class="nav-login-btn">Login</a>
             {% endif %}
         </nav>
     </header>
 
+    <!-- Main content area for child templates to fill -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
+    <!-- Footer with copyright -->
     <footer>
         <p>&copy; Delta Force Project</p>
     </footer>

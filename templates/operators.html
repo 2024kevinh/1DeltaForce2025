@@ -3,10 +3,16 @@
 {% block title %}Operators - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    operators.html
+    Shows a grid of all operators with their images and names.
+    Each card links to the operator's detail page.
+-->
 <h2>Meet the Operators</h2>
 
 <ul class="operator-list">
     {% for operator in operators %}
+        {# Operator card with custom image for special names, otherwise uses default image #}
         {% if operator.name == 'Toxik' %}
             <li class="operator-card"
                 onclick="location.href='{{ url_for('operator_detail', operator_id=operator.id) }}'"

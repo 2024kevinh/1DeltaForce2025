@@ -3,14 +3,23 @@
 {% block title %}{{ category.replace('_', ' ').title() }} Weapons - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    weapon_category.html
+    Shows all weapons in a selected category as cards.
+    Each card links to the weapon's detail page.
+    Displays a back button to the previous weapon or weapon categories.
+-->
 {% if prev_weapon_id %}
+    <!-- Back to previous weapon detail if coming from a weapon page -->
     <a href="{{ url_for('weapon_detail', weapon_id=prev_weapon_id) }}" class="back-button">&larr; Back to Weapon</a>
 {% else %}
+    <!-- Back to weapon categories if not coming from a weapon page -->
     <a href="{{ url_for('weapons') }}" class="back-button">&larr; Back to Weapon Categories</a>
 {% endif %}
 <h2>{{ category.replace('_', ' ').title() }} Weapons</h2>
 <ul class="weapon-list">
     {% for weapon in weapons %}
+        <!-- Weapon card with background image and name -->
         <li class="weapon-card"
             onclick="location.href='{{ url_for('weapon_detail', weapon_id=weapon.id) }}'"
             style="background-image: url('{{ url_for('static', filename='images/' + weapon.name + '.png') }}'); background-size: cover; background-position: center; position: relative;">
@@ -19,6 +28,7 @@
             </div>
         </li>
     {% else %}
+        <!-- Message if no weapons found in this category -->
         <li>No weapons found in this category.</li>
     {% endfor %}
 </ul>

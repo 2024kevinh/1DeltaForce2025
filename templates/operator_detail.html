@@ -3,6 +3,11 @@
 {% block title %}{{ operator.name }} - Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    operator_detail.html
+    Shows detailed info for a single operator, including background image,
+    country, description, and abilities.
+-->
 <div class="operator-detail-bg"
      style="
         position: relative;
@@ -18,10 +23,12 @@
             background-image: url('{{ url_for('static', filename='images/' + operator.name|lower + '.jpg') }}');
         {% endif %}
      ">
+    <!-- Back to operators button -->
     <a href="{{ url_for('operators') }}" class="back-button operator-back-btn">&larr; Back to Operators</a>
     <div class="operator-detail-info{% if operator.name in ['D-Wolf', 'Luna', 'Hackclaw'] %} operator-detail-info-dark{% endif %}">
         <h1>{{ operator.name }}</h1>
         <h3>{{ operator.country_name }}</h3>
+        <!-- Operator description, split into lines for readability -->
         <p>
             {% set words = operator.info.split() %}
             {% for i in range(0, words|length, 6) %}
@@ -30,6 +37,7 @@
         </p>
     </div>
 </div>
+<!-- Operator abilities displayed in columns -->
 <div class="operator-abilities-row">
     {% for ability in operator.abilities %}
         <div class="operator-ability-col">{{ ability }}</div>

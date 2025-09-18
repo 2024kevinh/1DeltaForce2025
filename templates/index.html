@@ -3,6 +3,11 @@
 {% block title %}Delta Force{% endblock %}
 
 {% block content %}
+<!--
+    index.html
+    Homepage for Delta Force.
+    Shows flash messages, a hero image, and an introduction paragraph.
+-->
 <div class="flash-container">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -13,12 +18,14 @@
     {% endwith %}
 </div>
 <div class="hero-container">
+    <!-- Hero image and title -->
     <img src="{{ url_for('static', filename='images/Delta_Force_Hero_Image.webp') }}" alt="Delta Force Hero" class="hero-image">
     <div class="hero-text">
         <h1>Delta Force</h1>
     </div>
 </div>
 <div class="intro-container">
+    <!-- Introduction paragraph -->
     <p>
         Welcome to Delta Force! Assemble your elite squad, master unique operator abilities, and dominate the battlefield. Explore our operators and weapons to prepare for your next mission.
     </p>
