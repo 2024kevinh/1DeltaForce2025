@@ -186,6 +186,33 @@ main {
     font-family: 'Orbitron', sans-serif !important;
 }
 
+/* Hero subtitle and call-to-action button */
+.hero-subtitle {
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    color: #2ecc71;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+}
+.cta-btn {
+    display: inline-block;
+    padding: 0.7em 2em;
+    background: #2ecc71;
+    color: #232a36;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 1em;
+    transition: background 0.2s, color 0.2s;
+}
+.cta-btn:hover {
+    background: #27ae60;
+    color: #fff;
+}
+
 /* ====== Intro container ====== */
 /* Centered intro text for homepage */
 .intro-container {
@@ -611,4 +638,30 @@ form[action*="logout"] .nav-login-btn:hover {
 .weapon-card,
 .weapon-card * {
     user-select: none;
+}
+
+/* Features grid on homepage */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2em;
+    margin: 2.5em 0 1em 0;
+}
+.feature-card {
+    background: rgba(35,42,54,0.85);
+    border-radius: 12px;
+    padding: 1.5em 1em;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    color: #e0e0e0;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.feature-card h3 {
+    margin-bottom: 0.7em;
+    color: #2ecc71;
+    font-family: 'Orbitron', sans-serif;
 }

@@ -7,6 +7,7 @@
     index.html
     Homepage for Delta Force.
     Shows flash messages, a hero image, and an introduction paragraph.
+    Now includes feature highlights and a call to action.
 -->
 <div class="flash-container">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -22,12 +23,33 @@
     <img src="{{ url_for('static', filename='images/Delta_Force_Hero_Image.webp') }}" alt="Delta Force Hero" class="hero-image">
     <div class="hero-text">
         <h1>Delta Force</h1>
+        <p class="hero-subtitle">Tactical. Elite. Unstoppable.</p>
+        <a href="{{ url_for('register') }}" class="cta-btn">Join Now</a>
     </div>
 </div>
 <div class="intro-container">
     <!-- Introduction paragraph -->
     <p>
-        Welcome to Delta Force! Assemble your elite squad, master unique operator abilities, and dominate the battlefield. Explore our operators and weapons to prepare for your next mission.
+        Welcome to <span style="font-family: 'Orbitron', sans-serif;">Delta Force</span>!  
+        Assemble your elite squad, master unique operator abilities, and dominate the battlefield.<br>
+        Explore our operators and weapons to prepare for your next mission.
     </p>
+    <div class="features-grid">
+        <!-- Clickable card for Operators -->
+        <a href="{{ url_for('operators') }}" class="feature-card" style="text-decoration: none;">
+            <h3>Unique Operators</h3>
+            <p>Choose from a choice of 10 operators, each with their own abilities and playstyles.</p>
+        </a>
+        <!-- Clickable card for Weapons -->
+        <a href="{{ url_for('weapons') }}" class="feature-card" style="text-decoration: none;">
+            <h3>Realistic Weapons</h3>
+            <p>Browse detailed stats and info for every weapon in the game.</p>
+        </a>
+        <!-- Clickable card for Damage Simulator -->
+        <a href="{{ url_for('damage_simulator') }}" class="feature-card" style="text-decoration: none;">
+            <h3>Damage Simulator</h3>
+            <p>Test weapon performance and damage at different ranges and hit parts.</p>
+        </a>
+    </div>
 </div>
 {% endblock %}
