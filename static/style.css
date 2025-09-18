@@ -183,6 +183,7 @@ main {
     letter-spacing: 0.01em;
     margin: 0;
     text-shadow: 0 4px 32px #000, 0 1px 0 #444;
+    font-family: 'Orbitron', sans-serif !important;
 }
 
 /* ====== Intro container ====== */
@@ -238,6 +239,8 @@ main {
 .logo {
     font-size: 1.5em;
     color: #fff;
+    font-family: 'Orbitron', sans-serif !important;
+    letter-spacing: 0.05em;
 }
 
 /* ====== Weapon images ====== */
