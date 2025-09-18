@@ -1,387 +1,587 @@
 /* ====== Global page styles ====== */
 body {
-    font-family: "Bunken tech sans", sans-serif; /* Sets the font family */
-    margin: 0; /* Removes default page margin */
-    padding: 0; /* Removes default page padding */
-    background: #232a36; /* Dark background color */
-    color: #e0e0e0; /* Light text color */
+    font-family: "Bunken tech sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #232a36;
+    color: #e0e0e0;
 }
 
 /* ====== Shared styles for nav, header, and footer ====== */
 nav, header, footer {
-    background: #000; /* Black background */
-    color: #fff; /* White text */
-    padding: 1em 2em; /* Inner spacing (top/bottom: 1em, sides: 2em) */
-    box-shadow: none; /* Removes shadow */
-    margin: 0; /* Removes outside spacing */
-    border: 0; /* Removes border */
+    background: #000;
+    color: #fff;
+    padding: 1em 2em;
+    box-shadow: none;
+    margin: 0;
+    border: 0;
 }
 
-/* ====== Navigation links ====== */
 nav a {
-    color: #fff; /* White text */
-    margin: 0 1em; /* Horizontal spacing between links */
-    text-decoration: none; /* Removes underline */
+    color: #fff;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+nav {
+    padding: 1em 0em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* ====== Main content area ====== */
 main {
-    padding: 2em; /* Inner spacing */
-    background: #232a36; /* Dark background (same as body) */
+    padding: 2em;
 }
 
-/* ====== Operator card list ====== */
+/* ====== List grids ====== */
+.operator-list, 
+.weapon-list, 
+.weapon-category-list {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0;
+    display: grid;
+    gap: 24px;
+}
+
 .operator-list {
-    list-style: none; /* Removes bullet points */
-    padding: 0; /* Removes inner spacing */
-    margin: 2em 0; /* Vertical spacing */
-    display: grid; /* Enables CSS grid layout */
-    grid-template-columns: repeat(5, 1fr); /* Creates 5 equal columns */
-    gap: 24px; /* Space between items */
+    grid-template-columns: repeat(5, 1fr);
 }
 
-/* ====== Weapon and weapon category lists ====== */
 .weapon-list,
 .weapon-category-list {
-    list-style: none; /* Removes bullet points */
-    padding: 0; /* Removes inner spacing */
-    margin: 2em 0; /* Vertical spacing */
-    display: grid; /* Enables CSS grid layout */
-    grid-template-columns: repeat(6, 1fr); /* Creates 6 equal columns */
-    gap: 24px; /* Space between items */
+    grid-template-columns: repeat(6, 1fr);
 }
 
-/* ====== Card styles for operators, weapons, and categories ====== */
+/* ====== Card styles ====== */
 .operator-card,
 .weapon-card,
 .weapon-category-card {
-    position: relative; /* Needed for child absolute positioning */
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden; /* Clips content outside boundaries */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Drop shadow */
-    color: white; /* White text */
-    background: #19223a; /* Dark blue background */
-    background-size: cover; /* Background image covers entire area */
-    background-position: center top; /* Aligns background image */
-    padding: 16px; /* Inner spacing */
-    min-height: 400px; /* Minimum height */
-    max-width: 220px; /* Maximum width */
-    text-align: left; /* Aligns text to left */
-    display: flex; /* Flex container */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: flex-end; /* Pushes content to bottom */
-    cursor: pointer; /* Changes cursor on hover */
-    transition: transform 0.15s, box-shadow 0.15s; /* Smooth hover effect */
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: white;
+    background: #19223a;
+    background-size: cover;
+    background-position: center top;
+    padding: 16px;
+    min-height: 400px;
+    max-width: 220px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
 }
 
-/* ====== Card hover effect ====== */
 .operator-card:hover,
 .weapon-card:hover,
 .weapon-category-card:hover {
-    transform: translateY(-4px) scale(1.03); /* Moves & enlarges slightly */
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* Stronger shadow */
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
-/* ====== Dark overlay on operator card background ====== */
+/* ====== Operator card overlay ====== */
 .operator-card::before {
-    content: ""; /* Empty content */
-    position: absolute; /* Stretches across the card */
-    top: 0; left: 0; 
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); /* Semi-transparent overlay */
-    z-index: 0; /* Places behind text */
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
 }
 
-/* ====== Ensures card text is above overlay ====== */
 .operator-card * {
     position: relative;
     z-index: 1;
 }
 
-/* ====== Text alignment inside operator cards ====== */
+/* ====== Operator text styling ====== */
 .operator-card h3,
 .operator-card .operator-name,
 .operator-card .operator-country,
 .operator-card p,
 .operator-card ul {
-    text-align: left; /* Aligns all to left */
+    text-align: left;
 }
 
-/* ====== Operator name styling ====== */
 .operator-name {
-    font-size: 1.8em; /* Larger font */
-    font-weight: bold; /* Bold text */
-    margin-bottom: 5px; /* Small space below */
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-/* ====== Operator country styling ====== */
 .operator-country {
-    font-size: 0.9em; /* Smaller font */
-    display: block; /* Forces new line */
-    margin-top: -5px; /* Pulls text upwards */
-    opacity: 0.85; /* Slight transparency */
+    font-size: 0.9em;
+    display: block;
+    margin-top: -5px;
+    opacity: 0.85;
 }
 
-/* ====== Operator abilities list ====== */
 .operator-abilities {
-    list-style: none; /* Removes bullet points */
-    padding: 0; /* Removes spacing */
-    display: inline-block; /* Makes list shrink-wrap */
-    text-align: left; /* Left-aligns text */
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    text-align: left;
 }
 
-/* ====== Extra navigation styling ====== */
-nav {
-    color: #fff; /* White text */
-    padding: 1em 0em; /* Top/bottom spacing only */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adds subtle shadow */
-}
-
-/* ====== Hero section container (banner) ====== */
+/* ====== Hero section ====== */
 .hero-container {
-    position: relative; /* Needed for hero-text positioning */
-    width: 100vw; /* Full viewport width */
+    position: relative;
+    width: 100vw;
     left: 50%; right: 50%;
-    margin-left: -50vw; margin-right: -50vw; /* Full bleed effect */
-    margin-top: -35px; margin-bottom: 0; /* Adjusts placement */
-    padding: 0; /* Removes padding */
-    overflow: hidden; /* Hides overflow */
-    border-radius: 0; /* No rounded edges */
-    box-shadow: none; /* No shadow */
-    background: #232a36; /* Dark background */
+    margin-left: -50vw; margin-right: -50vw;
+    margin-top: -35px;
+    padding: 0;
+    overflow: hidden;
+    background: #232a36;
 }
 
-/* ====== Hero image ====== */
 .hero-image {
-    width: 100vw; /* Full width */
-    height: 60vh; /* 60% of viewport height */
-    object-fit: cover; /* Crops to fit */
-    display: block; /* Removes inline spacing */
-    filter: brightness(0.6) grayscale(0.1); /* Darkens & slightly greys */
-    border-radius: 0; /* No rounded corners */
-    margin: 0; padding: 0; /* Removes spacing */
+    width: 100vw;
+    height: 60vh;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.6) grayscale(0.1);
+    margin: 0; padding: 0;
 }
 
-/* ====== Hero text (overlay text) ====== */
 .hero-text {
-    position: absolute; /* Centers over hero image */
+    position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%); /* Perfect centering */
-    text-align: center; /* Centered text */
-    color: #fff; /* White text */
-    width: 100%; /* Full width */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    width: 100%;
 }
 
-/* ====== Hero text heading ====== */
 .hero-text h1 {
-    font-size: 5em; /* Very large text */
-    font-weight: bold; /* Bold */
-    letter-spacing: 0.01em; /* Slight spacing */
-    margin: 0; /* No spacing */
-    text-shadow: 0 4px 32px #000, 0 1px 0 #444; /* Glow effect */
+    font-size: 5em;
+    font-weight: bold;
+    letter-spacing: 0.01em;
+    margin: 0;
+    text-shadow: 0 4px 32px #000, 0 1px 0 #444;
 }
 
-/* ====== Intro container (below hero) ====== */
+/* ====== Intro container ====== */
 .intro-container {
-    max-width: 800px; /* Limits width */
-    margin: 2em auto; /* Centers horizontally with top/bottom margin */
-    background: none; /* No background */
-    padding: 2em 0 0 0; /* Top padding */
-    border-radius: 0; /* No rounded corners */
-    box-shadow: none; /* No shadow */
-    text-align: center; /* Centers text */
-    font-size: 1.3em; /* Slightly larger text */
-    color: #e0e0e0; /* Light grey text */
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em 0 0 0;
+    text-align: center;
+    font-size: 1.3em;
 }
 
 /* ====== Back button ====== */
-.back-button {
-    display: inline-block; /* Acts like inline but allows width/height */
-    padding: 0.35em 0.9em; /* Inner spacing */
-    font-size: 1em; /* Normal size */
-    background: #22305a; /* Blue background */
-    color: #fff; /* White text */
-    border-radius: 6px; /* Rounded edges */
-    text-decoration: none; /* Removes underline */
-    border: none; /* No border */
-    transition: background 0.2s; /* Smooth hover effect */
-    position: relative; /* Needed for stacking */
-    z-index: 2; /* Places above other content */
-    line-height: 1.2; /* Line height control */
-    white-space: nowrap; /* Prevents text wrapping */
-}
-.back-button:hover {
-    background: #19223a; /* Darker background on hover */
+.back-button,
+.operator-back-btn {
+    display: inline-block;
+    padding: 0.35em 0.9em;
+    font-size: 1em;
+    background: #22305a;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 2;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
-/* ====== Weapon card title ====== */
+.back-button:hover,
+.operator-back-btn:hover {
+    background: #19223a;
+}
+
+.operator-back-btn {
+    position: absolute;
+    top: 24px; left: 24px;
+}
+
+/* ====== Weapon card titles ====== */
 .weapon-card h3 {
-    font-size: 1.3em; /* Medium heading size */
-    margin: 0; /* Removes spacing */
-    word-break: break-word; /* Prevents overflow */
-    line-height: 1.1; /* Slightly tighter spacing */
+    font-size: 1.3em;
+    margin: 0;
+    word-break: break-word;
+    line-height: 1.1;
 }
 
-/* ====== Logo styling ====== */
+/* ====== Logo ====== */
 .logo {
-    font-size: 1.5em; /* Medium large font */
-    color: #fff; /* White */
-    letter-spacing: normal; /* Normal spacing */
+    font-size: 1.5em;
+    color: #fff;
 }
 
 /* ====== Weapon images ====== */
-.weapon-img {
-    display: flex; /* Flex container */
-    width: 400px; /* Fixed width */
-    height: auto; /* Keeps proportions */
-    margin: 0 auto 16px auto; /* Centers and adds bottom space */
-    object-fit: contain; /* Fits inside box */
-    align-items: center; /* Vertical center */
-    justify-content: center; /* Horizontal center */
-}
-
-/* ====== Rotated weapon image ====== */
+.weapon-img,
 .weapon-img-rotated {
-    width: 100vw; /* Full width */
-    height: 100%; /* Full height */
-    object-fit: contain; /* Keeps proportions */
+    object-fit: contain;
 }
 
-/* ====== Operator detail background section ====== */
+.weapon-img {
+    display: flex;
+    width: 400px;
+    height: auto;
+    margin: 0 auto 16px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.weapon-img-rotated {
+    width: 100vw;
+    height: 100%;
+}
+
+/* ====== Operator detail section ====== */
 .operator-detail-bg {
-    background-size: cover; /* Background covers area */
-    background-position: center; /* Centers image */
-    width: 100vw; /* Full width */
-    min-height: 100vh; /* Full viewport height */
-    margin-left: 50%; /* Used for centering */
-    transform: translateX(-50%); /* Centers background */
-    margin-top: -2em; margin-bottom: -2em; /* Adjusts placement */
-    display: flex; /* Flexbox layout */
-    flex-direction: column; /* Stacks vertically */
-    align-items: flex-start; /* Aligns to left */
-    position: relative; /* Needed for overlays */
-    z-index: 0; /* Sends to back */
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    min-height: 100vh;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: -2em; margin-bottom: -2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    z-index: 0;
 }
 
-/* ====== Operator detail info section ====== */
 .operator-detail-info {
-    position: relative; /* Stacks above background */
-    z-index: 1; /* Higher layer */
-    padding: 2em; /* Inner spacing */
-    width: 100%; /* Full width */
-    color: #e0e0e0; /* Light grey text */
-    text-align: left; /* Align left */
-    box-sizing: border-box; /* Includes padding in width */
-    background: none; /* No background */
+    position: relative;
+    z-index: 1;
+    padding: 2em;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    background: none;
 }
 
-/* ====== Operator back button ====== */
-.operator-back-btn {
-    position: absolute; /* Positioned relative to parent */
-    top: 24px; left: 24px; /* Places in top-left corner */
-    z-index: 2; /* Above everything else */
-    background: #22305a; /* Blue background */
-    color: #fff; /* White text */
-    border-radius: 6px; /* Rounded edges */
-    padding: 0.35em 0.9em; /* Inner spacing */
-    font-size: 1em; /* Normal size */
-    text-decoration: none; /* Removes underline */
-    border: none; /* No border */
-    transition: background 0.2s; /* Smooth hover */
-    line-height: 1.2; /* Spacing between lines */
-    white-space: nowrap; /* Prevents wrapping */
-}
-.operator-back-btn:hover {
-    background: #19223a; /* Darker blue on hover */
+.operator-detail-info-dark {
+    color: #111 !important;
 }
 
-/* ====== Operator abilities in column layout ====== */
+.operator-detail-info p {
+    font-weight: bold;
+}
+
+/* ====== Operator abilities layout ====== */
 .operator-abilities-column {
-    display: flex; /* Flexbox */
-    flex-direction: column; /* Stacks vertically */
-    align-items: center; /* Centers horizontally */
-    justify-content: space-evenly; /* Even spacing */
-    width: 100%; /* Full width */
-    max-width: 600px; /* Limits width */
-    margin: 2em auto 0 auto; /* Centers with top margin */
-    gap: 1em; /* Spacing between items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 600px;
+    margin: 2em auto 0 auto;
+    gap: 1em;
 }
 
-/* ====== Operator ability row ====== */
-.operator-ability-row {
-    background: rgba(35,42,54,0.85); /* Semi-transparent background */
-    color: #e0e0e0; /* Light grey text */
-    font-size: 1.2em; /* Medium-large font */
-    padding: 1em 2em; /* Inner spacing */
-    border-radius: 8px; /* Rounded edges */
-    width: 100%; /* Full width */
-    text-align: center; /* Centered text */
-    box-sizing: border-box; /* Includes padding */
-}
-
-/* ====== Operator abilities in row layout ====== */
-.operator-abilities-row {
-    display: flex; /* Flexbox */
-    flex-direction: row; /* Horizontal layout */
-    justify-content: space-evenly; /* Even spacing */
-    align-items: stretch; /* Stretches items equally */
-    width: 100%; /* Full width */
-    max-width: 900px; /* Limit width */
-    margin: 2em auto 0 auto; /* Center with spacing */
-    gap: 1em; /* Gap between */
-}
-
-/* ====== Operator ability column ====== */
+.operator-ability-row,
 .operator-ability-col {
-    background: rgba(35,42,54,0.85); /* Semi-transparent */
-    color: #e0e0e0; /* Light grey */
-    font-size: 1.1em; /* Medium font */
-    padding: 1em 0.5em; /* Inner spacing */
-    border-radius: 8px; /* Rounded edges */
-    flex: 1 1 0; /* Flexible width */
-    text-align: center; /* Centered text */
-    box-sizing: border-box; /* Includes padding */
-    min-width: 0; /* Prevents overflow */
+    background: rgba(35,42,54,0.85);
+    color: #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
 }
 
-/* ====== Weapon detail image container ====== */
-.weapon-detail-img-container {
-    position: relative; /* Positions child elements */
-    width: 100vw; /* Full width */
-    left: 50%; /* Used for centering */
-    transform: translateX(-50%); /* Centers horizontally */
-    margin: 0; /* Removes spacing */
-    padding: 0; /* Removes padding */
-    overflow: hidden; /* Hides overflow */
-    border-radius: 0; /* No rounded edges */
+.operator-ability-row {
+    font-size: 1.2em;
+    padding: 1em 2em;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* ====== Wrapper for weapon image ====== */
+.operator-ability-col {
+    font-size: 1.1em;
+    padding: 1em 0.5em;
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.operator-abilities-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    width: 100%;
+    max-width: 900px;
+    margin: 2em auto 0 auto;
+    gap: 1em;
+}
+
+/* ====== Weapon detail sections ====== */
+.weapon-detail-img-container,
 .weapon-img-wrapper {
-    position: relative; /* Container for overlay */
-    width: 100vw; /* Full width */
-    height: auto; /* Keeps proportions */
-    display: block; /* Block-level element */
-    overflow: hidden; /* Hides overflow */
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-/* ====== Weapon info and ammo sections ====== */
+.weapon-img-wrapper {
+    display: block;
+    height: auto;
+}
+
 .weapon-info-section,
 .weapon-ammo-section {
-    max-width: 900px; /* Limit width */
-    margin: 2em auto 0 auto; /* Centered with spacing */
-    background: rgba(35,42,54,0.85); /* Semi-transparent background */
-    padding: 2em; /* Inner spacing */
-    border-radius: 16px; /* Rounded edges */
-    color: #e0e0e0; /* Light grey text */
+    max-width: 900px;
+    background: rgba(35,42,54,0.85);
+    padding: 2em;
+    border-radius: 16px;
+    text-align: left;
 }
 
-/* ====== Operator detail info section (dark mode) ====== */
-.operator-detail-info-dark {
-    color: #111 !important; /* Black text for light backgrounds */
+/* ====== Navbar login/logout buttons ====== */
+.nav-login-btn {
+    float: right;
+    background: #22305a;
+    color: #fff;
+    padding: 0.5em 1.2em;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: "Bunken tech sans", sans-serif !important;
+    font-weight: bold;
+    margin-left: 2em;
+    margin-top: -0.5em;
+    transition: background 0.2s;
 }
 
-/* ====== Operator detail info paragraph styling ====== */
-.operator-detail-info p {
-    font-weight: bold; /* Bold text */
+.nav-login-btn:hover {
+    background: #19223a;
+}
+
+form[action*="logout"] .nav-login-btn {
+    background: oklab(71.223% -0.15509 0.08477);
+    cursor: pointer;
+}
+
+form[action*="logout"] .nav-login-btn:hover {
+    background: #c0392b;
+}
+
+/* ====== Damage Simulator Page ====== */
+.damage-simulator-container {
+    max-width: 150%;
+    margin: 1em auto;
+    background: rgba(35,42,54,0.85);
+    color: #e0e0e0;
+}
+
+.damage-simulator-container h2 {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 1em;
+    color: #fff;
+}
+
+.damage-simulator-container select,
+.damage-simulator-container input[type="number"] {
+    width: 100%;
+    padding: 0.7em;
+    border-radius: 8px;
+    border: none;
+    background: #19223a;
+    color: #e0e0e0;
+    font-size: 1em;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+
+.damage-simulator-container button[type="submit"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8em;
+    background: #22305a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: background 0.2s;
+}
+
+.damage-simulator-container button[type="submit"]:hover {
+    background: #19223a;
+}
+
+.sim-result {
+    background: rgba(35,42,54,0.95);
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-top: 2em;
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.sim-result h3 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #2ecc71;
+}
+
+/* ====== Weapon dropdown ====== */
+.weapon-dropdown-row {
+    display: flex;
+    gap: 4em;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.weapon-dropdown-col {
+    flex: 1 1 0;
+    min-width: 120px;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ====== Weapon detail page ====== */
+.weapon-detail-bg {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    border-radius: 16px;
+    margin-bottom: 2em;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+}
+
+.weapon-card-info {
+    background: rgba(35,42,54,0.85);
+    padding: 1em;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    color: #e0e0e0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: left;
+}
+
+/* Keep only once — no need to repeat */
+.weapon-info-section,
+.weapon-ammo-section {
+    background: rgba(35,42,54,0.85);
+    padding: 2em;
+    border-radius: 0 0 16px 16px;
+    width: 100%;
+    color: #e0e0e0;
+    position: relative;
+    min-height: 200px;
+}
+
+.weapon-img {
+    display: block;
+    width: 80px; /* adjust as needed */
+    height: auto;
+    margin: 0 auto 8px auto;
+    object-fit: contain;
+}
+
+.weapon-detail-img-container,
+.weapon-img-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.weapon-detail-img-container {
+    border-radius: 16px 16px 0 0;
+}
+
+.weapon-img-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.weapon-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.weapon-category {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+}
+
+.operator-back-btn {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    z-index: 10;
+    background: rgba(35, 42, 54, 0.85);
+    color: #e0e0e0;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.operator-back-btn:hover {
+    background: rgba(35, 42, 54, 1);
+}
+
+/* Stats grid */
+.weapon-stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin: 2em 0 1em 0;
+    justify-content: flex-start;
+}
+
+.weapon-stat-card {
+    background: #22305a;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1em 1.5em;
+    min-width: 120px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    letter-spacing: 1px;
+    color: #2ecc71;
+}
+
+.stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+/* Disable text highlight on weapon cards */
+.weapon-card,
+.weapon-card * {
+    user-select: none;
 }

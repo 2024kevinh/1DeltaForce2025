@@ -11,7 +11,15 @@
         <nav>
             <a href="{{ url_for('index') }}">Home</a> |
             <a href="{{ url_for('operators') }}">Operators</a> |
-            <a href="{{ url_for('weapons') }}">Weapons</a>
+            <a href="{{ url_for('weapons') }}">Weapons</a> |
+            <a href="{{ url_for('damage_simulator') }}" class="nav-link">Damage Simulator</a>
+            {% if g.user %}
+                <form action="{{ url_for('logout') }}" method="post" style="display:inline;">
+                    <button type="submit" class="nav-login-btn">{{ g.user['name'] }}</button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="nav-login-btn">Login</a>
+            {% endif %}
         </nav>
     </header>
 

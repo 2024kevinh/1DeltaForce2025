@@ -12,129 +12,54 @@
     </div>
 </div>
 <div class="weapon-info-section">
-    <h3>Weapon Information</h3>
+    <h3>Weapon Information:</h3>
     <p>{{ weapon.description }}</p>
+    <p>{{ weapon.weapon_info }}</p>
+    <div class="weapon-stats-grid">
+        <div class="weapon-stat-card">
+            <span class="stat-label">Damage</span>
+            <span class="stat-value">{{ weapon.damage }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Range</span>
+            <span class="stat-value">{{ weapon.range }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Fire Rate</span>
+            <span class="stat-value">{{ weapon.fire_rate }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Capacity</span>
+            <span class="stat-value">{{ weapon.capacity }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Control</span>
+            <span class="stat-value">{{ weapon.control }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Handling</span>
+            <span class="stat-value">{{ weapon.handling }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Stability</span>
+            <span class="stat-value">{{ weapon.stability }}</span>
+        </div>
+        <div class="weapon-stat-card">
+            <span class="stat-label">Accuracy</span>
+            <span class="stat-value">{{ weapon.accuracy }}</span>
+        </div>
+
+    </div>
 </div>
 <div class="weapon-ammo-section">
-    <h3>Ammo Information</h3>
-    <!-- Ammo info goes here -->
+    <h3>Ammo Information:</h3>
+    {% if ammo_list %}
+        {% for ammo in ammo_list %}
+            <h4>{{ ammo.name }}</h4>
+            <p>{{ ammo.info }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No ammo information available for this weapon.</p>
+    {% endif %}
 </div>
 {% endblock %}
-
-<style>
-.weapon-detail-bg {
-    position: relative;
-    width: 100%;
-    min-height: 60vh;
-    border-radius: 16px;
-    margin-bottom: 2em;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-}
-.weapon-card-info {
-    background: rgba(35,42,54,0.85);
-    padding: 1em;
-    border-radius: 0 0 10px 10px;
-    width: 100%;
-    color: #e0e0e0;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    font-family: "Bunken tech sans", sans-serif !important;
-    text-align: left;
-}
-.weapon-info-section, .weapon-ammo-section {
-    background: rgba(35,42,54,0.85);
-    padding: 2em;
-    border-radius: 0 0 16px 16px;
-    width: 100%;
-    color: #e0e0e0;
-    font-family: "Bunken tech sans", sans-serif !important;
-    text-align: left;
-    position: relative;
-    min-height: 200px; /* ensure enough space for image */
-}
-.weapon-info-section h3, .weapon-ammo-section h3, .weapon-info-section p {
-    font-family: "Bunken tech sans", sans-serif !important;
-    text-align: left;
-}
-.weapon-img-detail {
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 120px; /* adjust as needed */
-    height: auto;
-    transform: rotate(90deg);
-    object-fit: contain;
-    margin: 0;
-}
-.weapon-img {
-    display: block;
-    width: 80px; /* adjust as needed */
-    height: auto;
-    margin: 0 auto 8px auto;
-    transform: rotate(-90deg); /* anticlockwise */
-    object-fit: contain;
-}
-.weapon-img-rotated {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    transform: rotate(90deg); /* clockwise */
-    object-fit: contain;
-}
-.weapon-detail-img-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 16px 16px 0 0;
-}
-.weapon-img-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-.weapon-img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 0.5em;
-    text-align: center;
-    font-family: "Bunken tech sans", sans-serif !important;
-}
-.weapon-name {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-.weapon-category {
-    font-size: 1.2em;
-    margin-top: 0.5em;
-}
-.operator-back-btn {
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    z-index: 10;
-    background: rgba(35, 42, 54, 0.85);
-    color: #e0e0e0;
-    padding: 0.5em 1em;
-    border-radius: 10px;
-    text-decoration: none;
-    font-family: "Bunken tech sans", sans-serif !important;
-}
-.operator-back-btn:hover {
-    background: rgba(35, 42, 54, 1);
-}
-</style>

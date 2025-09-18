@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="flash-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
+        <div class="form-box active" id="register-form">
+            <form action="{{ url_for('register') }}" method="POST">
+                <h2>Register</h2>
+                <input type="text" name="name" placeholder="Name" required minlength="1" maxlength="20">
+                <input type="email" name="email" placeholder="Email" required minlength="3" maxlength="30">
+                <input type="password" name="password" placeholder="Password" required minlength="6" maxlength="20">
+                <select name="role" required>
+                    <option value="">--Select Role--</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit" name="register">Register</button>
+                <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

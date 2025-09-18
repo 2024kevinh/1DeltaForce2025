@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Damage Simulator - Delta Force{% endblock %}
+
+{% block content %}
+<div class="damage-simulator-container">
+    <h2>Damage Simulator</h2>
+    <form method="POST" id="damage-form">
+        <label for="weapon">Weapon:</label>
+        <select name="weapon" id="weapon" required>
+            <option value="" disabled selected>Select weapon</option>
+            {% for group in all_weapons %}
+                <optgroup label="{{ group.category }}">
+                    {% for w in group.weapons %}
+                        <option value="{{ w.id }}"
+                            {% if request.form.get('weapon')|int == w.id %}selected{% endif %}
+                        >{{ w.name }}</option>
+                    {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="hit_part">Hit Part:</label>
+        <select name="hit_part" id="hit_part" required>
+            <option value="legs" {% if request.form.get('hit_part') == 'legs' %}selected{% endif %}>Legs</option>
+            <option value="body" {% if request.form.get('hit_part') == 'body' %}selected{% endif %}>Body</option>
+            <option value="head" {% if request.form.get('hit_part') == 'head' %}selected{% endif %}>Head</option>
+        </select>
+        <br><br>
+        <label for="distance">Distance (meters):</label>
+        <input type="number" name="distance" id="distance" min="0" max="200" value="{{ request.form.get('distance', 0) }}" required>
+        <br><br>
+        <button type="submit">Simulate</button>
+    </form>
+
+    {% if result %}
+        <div class="sim-result" style="margin-top:2em;">
+            <h3>Result</h3>
+            <p><strong>Weapon:</strong> {{ result.weapon }}</p>
+            <p><strong>Hit Part:</strong> {{ result.hit_part }}</p>
+            <p><strong>Distance:</strong> {{ result.distance }}m</p>
+            <p><strong>Damage Dealt:</strong> {{ result.damage }}</p>
+            <p><strong>Remaining HP:</strong> {{ result.remaining_hp }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
